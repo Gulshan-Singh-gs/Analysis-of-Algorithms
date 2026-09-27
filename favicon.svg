@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff4d26" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff4d26" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#24262c"/>
+      <stop offset="50%" stop-color="#18191d"/>
+      <stop offset="100%" stop-color="#101114"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="32" cy="32" r="30" fill="url(#glow)" opacity="0.35"/>
+
+  <!-- Tactile Rounded Card Body -->
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
+  <!-- Bevel top highlight -->
+  <path d="M 16 5.5 L 48 5.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Dot-Matrix Screen / Recessed Display -->
+  <rect x="12" y="13" width="40" height="22" rx="6" fill="#0d0e11" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- Dot Matrix "5" pattern -->
+  <!-- Row 1 -->
+  <circle cx="21" cy="18" r="1.5" fill="#ff4d26"/>
+  <circle cx="25" cy="18" r="1.5" fill="#ff4d26"/>
+  <circle cx="29" cy="18" r="1.5" fill="#ff4d26"/>
+  <!-- Row 2 -->
+  <circle cx="21" cy="22" r="1.5" fill="#ff4d26"/>
+  <!-- Row 3 -->
+  <circle cx="21" cy="25" r="1.5" fill="#ff4d26"/>
+  <circle cx="25" cy="25" r="1.5" fill="#ff4d26"/>
+  <circle cx="29" cy="25" r="1.5" fill="#ff4d26"/>
+  <!-- Row 4 -->
+  <circle cx="29" cy="28.5" r="1.5" fill="#ff4d26"/>
+  <!-- Row 5 -->
+  <circle cx="21" cy="31" r="1.5" fill="#ff4d26"/>
+  <circle cx="25" cy="31" r="1.5" fill="#ff4d26"/>
+  <circle cx="29" cy="31" r="1.5" fill="#ff4d26"/>
+
+  <!-- Waveform dots on the right -->
+  <circle cx="36" cy="27" r="1.2" fill="#5c626d"/>
+  <circle cx="36" cy="23" r="1.2" fill="#5c626d"/>
+  <circle cx="36" cy="19" r="1.2" fill="#e2e8f0"/>
+
+  <circle cx="40" cy="27" r="1.2" fill="#5c626d"/>
+  <circle cx="40" cy="23" r="1.2" fill="#ff4d26"/>
+  <circle cx="40" cy="19" r="1.2" fill="#ff4d26"/>
+  <circle cx="40" cy="15" r="1.2" fill="#ff4d26"/>
+
+  <circle cx="44" cy="27" r="1.2" fill="#5c626d"/>
+  <circle cx="44" cy="23" r="1.2" fill="#e2e8f0"/>
+
+  <!-- Tactile Accent Dot / LED Indicator -->
+  <circle cx="20" cy="46" r="3" fill="#ff4d26"/>
+  <circle cx="20" cy="46" r="5" stroke="#ff4d26" stroke-opacity="0.4" fill="none"/>
+
+  <!-- Bottom Data Matrix bars -->
+  <rect x="28" y="44" width="8" height="3" rx="1.5" fill="#3f444d"/>
+  <rect x="38" y="44" width="14" height="3" rx="1.5" fill="#e2e8f0"/>
+</svg>

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5TH M1 PLATINUM // ACADEMIC OS</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #111215;
+      --bg-ambient: radial-gradient(circle at 10% 15%, rgba(255, 110, 40, 0.18) 0%, transparent 45%),
+                    radial-gradient(circle at 90% 40%, rgba(90, 105, 120, 0.12) 0%, transparent 50%),
+                    #121316;
+      --card-bg: #18191d;
+      --card-inner: #151619;
+      --card-border: rgba(255, 255, 255, 0.07);
+      --card-bevel-top: rgba(255, 255, 255, 0.12);
+      --card-shadow: 
+        0 20px 35px -8px rgba(0, 0, 0, 0.85),
+        0 1px 0 1px rgba(255, 255, 255, 0.08) inset,
+        0 -1px 0 1px rgba(0, 0, 0, 0.6) inset;
+      --orange-accent: #ff4d26;
+      --orange-glow: rgba(255, 77, 38, 0.38);
+      --text-dot: #e2e8f0;
+      --text-dim: #5c626d;
+      --text-muted: #3f444d;
+      --green-accent: #22c55e;
+      --cyan-accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg-ambient);
+      color: var(--text-dot);
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+      padding: 40px 24px 80px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle dot grid backdrop */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top HUD Banner */
+    .hud-header {
+      margin-bottom: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand-title {
+      font-family: 'Silkscreen', 'VT323', monospace;
+      font-size: 2.1rem;
+      letter-spacing: 0.12em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: #f1f5f9;
+      text-shadow: 0 0 14px rgba(255, 255, 255, 0.15);
+    }
+
+    .brand-subtitle {
+      font-family: 'Silkscreen', monospace;
+      font-size: 1.15rem;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+      margin-top: 10px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange-accent);
+      box-shadow: 0 0 10px var(--orange-accent);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hud-meta {
+      text-align: right;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .hud-meta span {
+      display: block;
+      color: #94a3b8;
+      font-size: 0.88rem;
+    }
+
+    /* Section Subhead */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Tactile Neumorphic Pill Cards Grid (Ascending Order) */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    /* The exact tactile morphism from the reference image */
+    .tactile-card {
+      background: linear-gradient(175deg, #1c1d22 0%, #16171b 45%, #121316 100%);
+      border-radius: 28px;
+      padding: 24px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      overflow: hidden;
+    }
+
+    .tactile-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    }
+
+    .tactile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 26px 45px -8px rgba(0, 0, 0, 0.95),
+        0 0 20px rgba(255, 77, 38, 0.2),
+        0 1px 0 1px rgba(255, 255, 255, 0.15) inset;
+      border-color: rgba(255, 77, 38, 0.35);
+    }
+
+    .tactile-card:active {
+      transform: translateY(-1px) scale(0.99);
+      box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.8),
+        0 0 10px rgba(255, 77, 38, 0.3) inset;
+    }
+
+    .tactile-card.active {
+      border-color: var(--orange-accent);
+      box-shadow: 
+        0 20px 40px -8px rgba(0, 0, 0, 0.9),
+        0 0 28px var(--orange-glow),
+        0 1px 0 1px rgba(255, 255, 255, 0.2) inset;
+    }
+
+    /* Card Top Header */
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .card-index {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .card-sys {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Subject Dot-Matrix Code Title */
+    .card-code {
+      font-family: 'Silkscreen', 'VT323', monospace;
+      font-size: 1.65rem;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #8c93a0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      min-height: 38px;
+    }
+
+    /* Dot Matrix Graphic Zone */
+    .dot-matrix-display {
+      margin: 14px 0;
+      padding: 10px 12px;
+      background: #111215;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .dot-waveform {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 28px;
+    }
+
+    .dot-bar {
+      width: 3px;
+      background: #2a2e36;
+      border-radius: 2px;
+      transition: height 0.3s ease;
+    }
+
+    .dot-bar.accent {
+      background: var(--orange-accent);
+      box-shadow: 0 0 6px var(--orange-accent);
+    }
+
+    .dot-bar.active-glow {
+      background: #e2e8f0;
+      box-shadow: 0 0 4px #fff;
+    }
+
+    .tactile-card:hover .dot-bar.accent {
+      filter: brightness(1.2);
+    }
+
+    .metric-bubble {
+      font-family: 'Silkscreen', monospace;
+      font-size: 0.88rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .metric-bubble small {
+      font-size: 0.65rem;
+      color: var(--orange-accent);
+    }
+
+    /* Card Bottom Specs */
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.72rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .footer-col .label {
+      color: var(--text-dim);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-col .val {
+      color: #f1f5f9;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+    }
+
+    .action-tag {
+      font-family: 'Silkscreen', monospace;
+      font-size: 0.68rem;
+      background: rgba(255, 77, 38, 0.12);
+      color: var(--orange-accent);
+      border: 1px solid rgba(255, 77, 38, 0.3);
+      padding: 4px 10px;
+      border-radius: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Timetable Display in Tactile UI */
+    .timetable-tactile-panel {
+      background: linear-gradient(175deg, #191a1e 0%, #131417 100%);
+      border-radius: 30px;
+      padding: 30px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+
+    .timetable-tactile-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 7px;
+      min-width: 920px;
+    }
+
+    .timetable-tactile-table th {
+      background: #101114;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      padding: 10px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .timetable-tactile-table th span {
+      display: block;
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .day-slot {
+      background: #111215;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f1f5f9;
+      font-family: 'Silkscreen', monospace;
+      font-size: 1.1rem;
+      text-align: center;
+      width: 74px;
+      border-radius: 14px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .tactile-slot {
+      background: #15161a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+      transition: all 0.22s ease;
+      position: relative;
+    }
+
+    .tactile-slot.interactive {
+      cursor: pointer;
+      background: linear-gradient(180deg, #1b1c21 0%, #15161a 100%);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .tactile-slot.interactive:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .tactile-slot.highlighted {
+      background: linear-gradient(180deg, rgba(255, 77, 38, 0.25) 0%, rgba(20, 21, 25, 0.9) 100%) !important;
+      border-color: var(--orange-accent) !important;
+      box-shadow: 0 0 20px var(--orange-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      transform: scale(1.02);
+      z-index: 2;
+    }
+
+    .slot-title {
+      font-family: 'Silkscreen', 'VT323', monospace;
+      font-size: 0.95rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+
+    .slot-meta {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .break-vertical {
+      background: rgba(255, 77, 38, 0.04);
+      border: 1px dashed rgba(255, 77, 38, 0.2);
+      color: var(--orange-accent);
+      font-family: 'Silkscreen', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      writing-mode: vertical-lr;
+      text-orientation: upright;
+      text-align: center;
+      border-radius: 12px;
+      width: 38px;
+    }
+
+    /* Reset button */
+    .reset-btn {
+      font-family: 'Silkscreen', monospace;
+      font-size: 0.7rem;
+      background: #121316;
+      border: 1px solid var(--card-border);
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      transition: all 0.2s ease;
+    }
+    .reset-btn:hover {
+      border-color: var(--orange-accent);
+      color: var(--orange-accent);
+    }
+
+    /* Footer stamp matching reference */
+    .bottom-footer {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-family: 'Silkscreen', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+    }
+
+    .bottom-footer .author {
+      text-align: right;
+      color: #7b828f;
+    }
+
+    .blinking-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 12px;
+      background: var(--orange-accent);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Mobile Quick Day Navigation Pill Bar */
+    .mobile-day-filter {
+      display: none;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      margin-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .mobile-day-filter::-webkit-scrollbar {
+      display: none;
+    }
+    .day-pill-btn {
+      font-family: 'Silkscreen', monospace;
+      font-size: 0.75rem;
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: #18191d;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .day-pill-btn.active, .day-pill-btn:active {
+      background: var(--orange-accent);
+      color: #fff;
+      border-color: var(--orange-accent);
+      box-shadow: 0 0 12px var(--orange-glow);
+    }
+
+    .scroll-hint {
+      display: none;
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==============================================================
+       Mobile & Tablet Responsive Media Queries
+       ============================================================== */
+    @media (max-width: 900px) {
+      body {
+        padding: 24px 16px 60px;
+      }
+      .hud-header {
+        margin-bottom: 24px;
+        gap: 14px;
+      }
+      .brand-title {
+        font-size: 1.65rem;
+      }
+      .brand-subtitle {
+        font-size: 0.95rem;
+      }
+      .subjects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 12px 60px;
+      }
+
+      .hud-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .hud-meta {
+        text-align: left;
+        width: 100%;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .brand-title {
+        font-size: 1.45rem;
+        letter-spacing: 0.08em;
+      }
+
+      .brand-subtitle {
+        font-size: 0.82rem;
+      }
+
+      .status-badge {
+        font-size: 0.7rem;
+      }
+
+      .section-label {
+        font-size: 0.68rem;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .tactile-card {
+        padding: 18px;
+        border-radius: 22px;
+        min-height: auto;
+      }
+
+      .card-code {
+        font-size: 1.4rem;
+      }
+
+      .card-desc {
+        min-height: auto;
+        margin-bottom: 6px;
+      }
+
+      .timetable-tactile-panel {
+        padding: 16px 12px;
+        border-radius: 20px;
+        margin-top: 10px;
+      }
+
+      .scroll-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .mobile-day-filter {
+        display: flex;
+      }
+
+      .bottom-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        font-size: 0.72rem;
+        margin-top: 36px;
+      }
+      .bottom-footer .author {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top HUD Header -->
+    <header class="hud-header">
+      <div>
+        <div class="brand-title">5TH M1 PLATINUM</div>
+        <div class="brand-subtitle">ACADEMIC MATRIX &bull; CSE_USC</div>
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>ALL SYSTEMS OPERATIONAL</span>
+          <span style="color:var(--text-muted);">&bull;</span>
+          <span style="color:var(--text-dim);">SEMESTER V</span>
+        </div>
+      </div>
+      <div class="hud-meta">
+        <div>GENERATED // <span>22-09-2026</span></div>
+        <div style="margin-top:4px;">LOCATIONS // <span>ROOM 415 &bull; LABS</span></div>
+      </div>
+    </header>
+
+    <!-- Subjects Section (Ascending Order) -->
+    <div class="section-label">
+      <span>01 &bull; COURSE MODULES (ASCENDING ORDER A &rarr; Z)</span>
+      <button class="reset-btn" id="resetBtn" onclick="resetActiveFilter()">[ RESET FILTER ]</button>
+    </div>
+
+    <!-- 7 Tactile Cards in Ascending Order -->
+    <div class="subjects-grid" id="subjectsGrid"></div>
+
+    <!-- Timetable Section -->
+    <div class="section-label" style="margin-top: 14px;">
+      <span>02 &bull; TIMETABLE DISPATCH SCHEDULE (CLICK TO HIGHLIGHT)</span>
+      <span class="scroll-hint">&larr; SWIPE TABLE &rarr;</span>
+      <span style="display:none;" id="desktopDayRange">MON &rarr; FRI</span>
+    </div>
+
+    <!-- Mobile Quick Day Selector -->
+    <div class="mobile-day-filter">
+      <button class="day-pill-btn active" onclick="filterByDay('ALL', this)">ALL DAYS</button>
+      <button class="day-pill-btn" onclick="filterByDay('MO', this)">MON</button>
+      <button class="day-pill-btn" onclick="filterByDay('TU', this)">TUE</button>
+      <button class="day-pill-btn" onclick="filterByDay('WE', this)">WED</button>
+      <button class="day-pill-btn" onclick="filterByDay('TH', this)">THU</button>
+      <button class="day-pill-btn" onclick="filterByDay('FR', this)">FRI</button>
+    </div>
+
+    <div class="timetable-tactile-panel">
+      <table class="timetable-tactile-table" id="timetableGrid">
+        <thead>
+          <tr>
+            <th style="width: 74px;">DAY</th>
+            <th>01<span>09:15 - 10:05</span></th>
+            <th>02<span>10:05 - 10:55</span></th>
+            <th>03<span>10:55 - 11:45</span></th>
+            <th>04<span>11:45 - 12:35</span></th>
+            <th style="width: 38px;">BRK<span>12:35</span></th>
+            <th>05<span>13:25 - 14:15</span></th>
+            <th>06<span>14:15 - 15:00</span></th>
+            <th>07<span>15:00 - 15:45</span></th>
+            <th>08<span>15:45 - 16:30</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Monday -->
+          <tr data-day="MO">
+            <td class="day-slot">MO</td>
+            <td class="tactile-slot" colspan="4">
+              <span style="color:var(--text-muted); font-size:0.75rem;">// NO SCHEDULED SESSIONS //</span>
+            </td>
+            <td class="break-vertical" rowspan="5">RECESS</td>
+            <td class="tactile-slot" colspan="4">
+              <span style="color:var(--text-muted); font-size:0.75rem;">// INDEPENDENT STUDY &amp; PROJECTS //</span>
+            </td>
+          </tr>
+
+          <!-- Tuesday -->
+          <tr data-day="TU">
+            <td class="day-slot">TU</td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="IAR">
+              <div class="slot-title">IAR</div>
+              <div class="slot-meta"><span>ER. ANJUM</span><span>203</span></div>
+            </td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="Intro AA">
+              <div class="slot-title">Intro AA</div>
+              <div class="slot-meta"><span>ER. GHANSHYAM</span><span>LAB_123</span></div>
+            </td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="RDBMS">
+              <div class="slot-title">RDBMS</div>
+              <div class="slot-meta"><span>MR. AAMIR</span><span>414</span></div>
+            </td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="QC">
+              <div class="slot-title">QC</div>
+              <div class="slot-meta"><span>ER. RIYA</span><span>415</span></div>
+            </td>
+          </tr>
+
+          <!-- Wednesday -->
+          <tr data-day="WE">
+            <td class="day-slot">WE</td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="Intro AA">
+              <div class="slot-title">Intro AA</div>
+              <div class="slot-meta"><span>ER. GHANSHYAM</span><span>414</span></div>
+            </td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="RDBMS">
+              <div class="slot-title">RDBMS</div>
+              <div class="slot-meta"><span>MR. AAMIR</span><span>414</span></div>
+            </td>
+            <td class="tactile-slot interactive" data-sub="CSL_PB">
+              <div class="slot-title">CSL_PB</div>
+              <div class="slot-meta"><span>POONAM</span><span>208</span></div>
+            </td>
+            <td class="tactile-slot interactive" data-sub="AA_DI">
+              <div class="slot-title">AA_DI</div>
+              <div class="slot-meta"><span>MUKESH</span><span>208</span></div>
+            </td>
+            <td class="tactile-slot" style="opacity: 0.45;">
+              <div class="slot-title" style="font-size:0.75rem; color:var(--text-dim);">LIB</div>
+              <div class="slot-meta"><span>CENTRAL</span></div>
+            </td>
+            <td class="tactile-slot interactive" data-sub="NSC">
+              <div class="slot-title">NSC</div>
+              <div class="slot-meta"><span>SIMRAN</span><span>203</span></div>
+            </td>
+          </tr>
+
+          <!-- Thursday -->
+          <tr data-day="TH">
+            <td class="day-slot">TH</td>
+            <td class="tactile-slot" colspan="4" style="opacity: 0.45;">
+              <div class="slot-title" style="font-size:0.82rem; color:var(--text-dim);">SPORTS WELLNESS</div>
+              <div class="slot-meta"><span>GROUND</span></div>
+            </td>
+            <td class="tactile-slot" colspan="4" style="opacity: 0.45;">
+              <div class="slot-title" style="font-size:0.82rem; color:var(--text-dim);">LIBRARY / RESEARCH</div>
+              <div class="slot-meta"><span>READING HALL</span></div>
+            </td>
+          </tr>
+
+          <!-- Friday -->
+          <tr data-day="FR">
+            <td class="day-slot">FR</td>
+            <td class="tactile-slot interactive" data-sub="NSC">
+              <div class="slot-title">NSC</div>
+              <div class="slot-meta"><span>SIMRAN</span><span>203</span></div>
+            </td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="IAR">
+              <div class="slot-title">IAR</div>
+              <div class="slot-meta"><span>ER. ANJUM</span><span>203</span></div>
+            </td>
+            <td class="tactile-slot interactive" data-sub="NSC">
+              <div class="slot-title">NSC</div>
+              <div class="slot-meta"><span>SIMRAN</span><span>223</span></div>
+            </td>
+            <td class="tactile-slot interactive" data-sub="AA_DI">
+              <div class="slot-title">AA_DI</div>
+              <div class="slot-meta"><span>MUKESH</span><span>208</span></div>
+            </td>
+            <td class="tactile-slot interactive" data-sub="CSL_PB">
+              <div class="slot-title">CSL_PB</div>
+              <div class="slot-meta"><span>POONAM</span><span>209</span></div>
+            </td>
+            <td class="tactile-slot interactive" colspan="2" data-sub="QC">
+              <div class="slot-title">QC</div>
+              <div class="slot-meta"><span>ER. RIYA</span><span>415</span></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bottom Footer Matching DeerFlow Aesthetic -->
+    <div class="bottom-footer">
+      <div>
+        ACADEMIC MATRIX WITH INTELLIGENCE<span class="blinking-cursor"></span>
+      </div>
+      <div class="author">
+        CSE_USC &bull; 5TH M1<br>
+        BY HENRY AESTHETICS
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 7 Core Academic Subjects in strict ASCENDING order (A -> Z)
+    const subjects = [
+      {
+        id: "01",
+        code: "AA_DI",
+        title: "DOMAIN INTELLIGENCE",
+        fullName: "Advanced Algorithms & Domain Intelligence",
+        faculty: "Mr. Mukesh",
+        room: "Room 208",
+        sessions: "2 Sessions/wk",
+        bars: [6, 12, 18, 22, 16, 24, 28, 14, 10, 8],
+        metric: "88%",
+        metricLabel: "ATTN"
+      },
+      {
+        id: "02",
+        code: "CSL_PB",
+        title: "SYSTEMS LAB (PB)",
+        fullName: "Computer Systems Lab Practical",
+        faculty: "Ms. Poonam",
+        room: "Room 208 / 209",
+        sessions: "2 Sessions/wk",
+        bars: [14, 22, 28, 18, 12, 8, 16, 26, 20, 15],
+        metric: "LAB",
+        metricLabel: "READY"
+      },
+      {
+        id: "03",
+        code: "IAR",
+        title: "AI & ROBOTICS",
+        fullName: "Intro to Artificial Intelligence & Robotics",
+        faculty: "Er. Anjum",
+        room: "Room 203",
+        sessions: "4 Sessions/wk",
+        bars: [8, 16, 10, 26, 30, 24, 18, 12, 20, 25],
+        metric: "CORE",
+        metricLabel: "ACTIVE"
+      },
+      {
+        id: "04",
+        code: "Intro AA",
+        title: "ADV. ALGORITHMS",
+        fullName: "Introduction to Advanced Algorithms",
+        faculty: "Er. Ghanshyam",
+        room: "Lab_123 / Rm 414",
+        sessions: "4 Sessions/wk",
+        bars: [20, 24, 16, 12, 28, 30, 22, 18, 14, 19],
+        metric: "94%",
+        metricLabel: "SCORE"
+      },
+      {
+        id: "05",
+        code: "NSC",
+        title: "NET SECURITY",
+        fullName: "Network Security & Cryptography",
+        faculty: "Er. SIMRAN",
+        room: "Room 203 / 223",
+        sessions: "3 Sessions/wk",
+        bars: [12, 18, 24, 15, 28, 22, 19, 25, 29, 17],
+        metric: "SEC",
+        metricLabel: "PASS"
+      },
+      {
+        id: "06",
+        code: "QC",
+        title: "QUANTUM COMPUTING",
+        fullName: "Quantum Computing / Quality Control",
+        faculty: "Er. Riya",
+        room: "Room 415",
+        sessions: "4 Sessions/wk",
+        bars: [10, 15, 22, 28, 24, 18, 29, 26, 20, 12],
+        metric: "QPU",
+        metricLabel: "ONLINE"
+      },
+      {
+        id: "07",
+        code: "RDBMS",
+        title: "DATABASE SYSTEMS",
+        fullName: "Relational Database Management Systems",
+        faculty: "Mr. Aamir",
+        room: "Room 414",
+        sessions: "4 Sessions/wk",
+        bars: [16, 20, 26, 18, 22, 28, 14, 19, 23, 27],
+        metric: "SQL",
+        metricLabel: "LIVE"
+      }
+    ];
+
+    // Ensure sorted ascending by code
+    subjects.sort((a, b) => a.code.localeCompare(b.code));
+
+    const grid = document.getElementById('subjectsGrid');
+    let activeCode = null;
+
+    subjects.forEach((sub, idx) => {
+      const card = document.createElement('div');
+      card.className = 'tactile-card';
+      card.id = `card-${sub.code.replace(/[\s_]/g, '-')}`;
+
+      // Build bars
+      const barsHtml = sub.bars.map((height, i) => {
+        const isAccent = (i >= 5 && i <= 7);
+        return `<div class="dot-bar ${isAccent ? 'accent' : ''}" style="height: ${height}px;"></div>`;
+      }).join('');
+
+      card.innerHTML = `
+        <div>
+          <div class="card-head">
+            <span class="card-index">${String(idx + 1).padStart(2, '0')} // ${sub.code}</span>
+            <span class="card-sys">SEC 5M1</span>
+          </div>
+          <div class="card-code">${sub.code}</div>
+          <div class="card-desc">${sub.fullName}</div>
+        </div>
+
+        <div class="dot-matrix-display">
+          <div class="dot-waveform">${barsHtml}</div>
+          <div class="metric-bubble">
+            ${sub.metric} <small>${sub.metricLabel}</small>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="footer-col">
+            <span class="label">FACULTY</span>
+            <span class="val">${sub.faculty}</span>
+          </div>
+          <div class="footer-col">
+            <span class="label">VENUE</span>
+            <span class="val">${sub.room}</span>
+          </div>
+          <div class="action-tag">${sub.sessions}</div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        toggleHighlight(sub.code);
+      });
+
+      grid.appendChild(card);
+    });
+
+    // Handle Timetable cell clicks
+    document.querySelectorAll('.tactile-slot.interactive').forEach(slot => {
+      slot.addEventListener('click', () => {
+        const sub = slot.getAttribute('data-sub');
+        if (sub) toggleHighlight(sub);
+      });
+    });
+
+    function toggleHighlight(code) {
+      if (activeCode === code) {
+        resetActiveFilter();
+        return;
+      }
+      activeCode = code;
+      document.getElementById('resetBtn').style.display = 'inline-block';
+
+      // Highlight matching cards
+      document.querySelectorAll('.tactile-card').forEach(card => {
+        const isTarget = card.id === `card-${code.replace(/[\s_]/g, '-')}`;
+        card.classList.toggle('active', isTarget);
+      });
+
+      // Highlight matching slots in timetable
+      document.querySelectorAll('.tactile-slot.interactive').forEach(slot => {
+        const isTarget = slot.getAttribute('data-sub') === code;
+        slot.classList.toggle('highlighted', isTarget);
+      });
+    }
+
+    function resetActiveFilter() {
+      activeCode = null;
+      document.getElementById('resetBtn').style.display = 'none';
+      document.querySelectorAll('.tactile-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tactile-slot').forEach(s => s.classList.remove('highlighted'));
+    }
+
+    // Mobile Quick Day Filter
+    function filterByDay(day, btn) {
+      document.querySelectorAll('.day-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const rows = document.querySelectorAll('#timetableGrid tbody tr');
+      rows.forEach(r => {
+        const rowDay = r.getAttribute('data-day');
+        if (day === 'ALL' || rowDay === day) {
+          r.style.display = '';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
